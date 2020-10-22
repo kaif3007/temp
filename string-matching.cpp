@@ -1,3 +1,123 @@
+###################
+Brute force
+###################
+
+#include<bits/stdc++.h>
+#define ll long long int
+
+using namespace std;
+
+
+string arr[1005];
+
+void process(string &s) 
+{
+    for(char &c: s) 
+    {
+        if(c=='o')  
+          c = 'a';
+        else if(c=='l')
+          c = 't';
+    }
+}
+
+bool match_subsequence(string& h,string& t)
+{
+	int p=0,q=0;
+	while(p<h.length() and q<t.length())
+	{
+		if(h[p]==t[q])
+		{
+			p++;
+			q++;
+		}
+		else
+			p++;
+	}
+
+	if(q==t.length())
+		 return true;
+
+    return false;
+}
+
+
+int main()
+{
+
+    int n;
+    cin>>n;
+    string s;
+    cin>>s;
+
+    process(s);
+
+    for(int i=0;i<n;i++)
+	{
+		cin>>arr[i];
+		process(arr[i]);
+	}
+
+    int k;
+    cin>>k;
+
+    int ans=0;
+    for(int i=0;i<n;i++)
+    {
+    	
+    	vector<string> v;
+    	//erase 1 char at every pos and store in vector v
+    	v.push_back(arr[i]);
+    	for(int j=0;j<arr[i].length();j++)
+    	{   
+    		string h=arr[i];
+    		v.push_back(h.erase(j,1));
+    	}
+
+   
+    	bool flag=0;
+    	for(int j=0;j<v.size();j++)
+    	{
+    		string t=v[j];
+    		//cout<<t<<endl;
+    		//matched
+    		if(k>=t.length())
+    		{
+    			flag=1;
+    			break;
+    		}
+
+    		for(int x=0;x<=s.length()-(t.length()+k);x++)
+    		{
+    			
+    			string h=s.substr(x,k+t.length());
+    			//cout<<i<<" "<<h<<" "<<t<<endl;
+    			
+    			if(match_subsequence(h,t))
+                   {
+                   	 flag=1;
+                   	 break;
+                   }
+    		}
+
+    		if(flag)
+    			break;
+    	}
+
+    	if(flag)
+    		ans++;
+    }
+    	
+    
+
+    cout<<ans<<"\n";
+    
+    return 0;
+}
+
+
+
+######################################################################################################################################
 #include<bits/stdc++.h>
 #define pb push_back 
 #define ff first
