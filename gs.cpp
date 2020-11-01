@@ -149,3 +149,114 @@ int main()
     return 0;
 }
 ###########################################################################################
+
+#include "bits/stdc++.h"
+#define ll long long int
+
+using namespace std;
+
+
+void init(int arr[],int n)
+{
+for(int i=0;i<n;i++)                            
+    arr[i]=i;
+}
+
+int root(int arr[],int x)
+{ 
+   return arr[x]==x?arr[x]:arr[x]=root(arr,arr[x]);
+}
+
+void unionk(int arr[],int x,int y)
+{
+   if(x==y)
+      return;
+  
+    arr[root(arr,x)]=arr[root(arr,y)];
+}
+
+int kruskal(vector<pair<int , pair<int,int> > >&p ,int arr[])
+{
+    int e=p.size();
+    ll mincost=0,cost,x,y;
+    for(ll i=0;i<e;i++)
+    {                                            
+        x=p[i].second.first;
+        y=p[i].second.second;
+        cost=p[i].first;
+        
+        if(root(arr,x)!=root(arr,y))            
+        {
+            mincost+=cost;
+            unionk(arr,x,y);
+        }
+    }
+    
+    return mincost;
+}
+
+
+int main()
+{
+    int m,n;
+    cin>>m>>n;
+
+    int arr[m][n];
+
+    int ans=0;
+    int cnt=0;
+
+    for(int i=0;i<m;i++)
+    {
+        for(int j=0;j<n;j++)
+          {  
+             cin>>arr[i][j];
+
+             if(arr[i][j])
+             {
+                cnt++;
+                ans+=arr[i][j];
+             }
+          }
+    }
+
+    vector< pair<int,pair<int,int> > > v;
+
+    for(int i=0;i<m;i++)
+    {
+        for(int j=0;j<n;j++)
+        {
+            if(arr[i][j]>0)
+            {
+                for(int k=0;k<m;k++)
+                {
+                    for(int l=0;l<n;l++)
+                    {
+                        if(k==i and l==j or arr[k][l]==0)
+                            continue;
+
+                        int dist=abs(k-i)+abs(l-j);
+                        v.push_back({2*dist,{i*m+j,k*m+l}});
+                    }
+                }
+            }
+        }
+    }
+
+    sort(v.begin(),v.end());
+
+    int dp[n*m];
+
+    init(dp,n*m);
+
+    int a=kruskal(v,dp)+ans;
+
+    int p=a/8;
+
+    if(a%8)
+        p++;
+
+    cout<<p;
+
+    return 0;
+}
