@@ -1,4 +1,14 @@
- int n;
+That time will be during my internship period with Adobe. My project involved heavy use of a particular area of deep Learning which is known as object detection.
+I had a basic knowledge of deep learning before my internship but object detection is a quite advanced area.
+It was just because of my immense interest and passion in project motivated me to achive outstanding results in the end.
+#############################################################################################
+ 
+First I will try to find an estimate of how much work is left, especially my partner's work.Then I will try to replan the schedule considering only me 
+to ensure project is finished before deadline.
+I will also try to find if there is some other person whose is free having required skillset who can help me in this project if possible 
+
+#############################################################################################
+    int n;
     cin>>n;
 
     vector<int>arr(n);
