@@ -1,4 +1,68 @@
- 
+Given three strings A, B, C where A and B have the same length n.
+Find no of strings alphabetically greater than A and alphabetically less than B whose length is n such that C is not a substring.??
+########################################################################
+https://leetcode.com/problems/maximum-profit-in-job-scheduling/
+https://leetcode.com/problems/count-vowels-permutation/
+
+//dsu use kr lena. greater than g ke sbko combine // a kinda seive
+https://leetcode.com/discuss/interview-question/202553/Traveling-is-Fun/
+#######################################################################################
+
+int dp[100008][5];
+#define ll long long int
+#define mod 1000000007
+
+int recurse(int i,int n,int j)
+{
+    if(i==n)
+        return 1;
+    
+    if(dp[i][j]!=-1)
+        return dp[i][j];
+    
+    ll cnt=0;
+    
+    if(j==0)
+        cnt=recurse(i+1,n,1)%mod;
+    else if(j==4)
+        cnt=recurse(i+1,n,0)%mod;
+    else if(j==1)
+        cnt=(recurse(i+1,n,0)+recurse(i+1,n,2))%mod;   
+    else if(j==3)
+         cnt=(recurse(i+1,n,2)+recurse(i+1,n,4))%mod;
+    else
+    {
+        cnt=recurse(i+1,n,0)%mod;
+        cnt+=recurse(i+1,n,1);
+        cnt%=mod;
+        cnt+=recurse(i+1,n,3);
+        cnt%=mod;
+        cnt+=recurse(i+1,n,4);
+        cnt%=mod;
+    }
+        
+    return dp[i][j]=cnt;
+    
+}
+class Solution 
+{
+public:
+    int countVowelPermutation(int n) 
+    {
+        memset(dp,-1,sizeof(dp));
+        
+        ll ans=0;
+        
+        for(int i=0;i<5;i++)
+        {
+            ans+=recurse(1,n,i);
+            ans%=mod;
+        }
+        return ans;
+    }
+};
+
+#####################################################################
 PATH TO A GOAL
 #include <bits/stdc++.h>
 #define ll long long int
