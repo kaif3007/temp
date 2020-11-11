@@ -10,3 +10,5 @@ DISC SPACE UTILIZATION:-> https://leetcode.com/problems/sliding-window-maximum/
 BREAK A PALINDROME:-> https://leetcode.com/problems/break-a-palindrome/
 LABELLING SYSTEM:-> https://leetcode.com/discuss/interview-question/893442/
 CHEMICAL DELIVERY SYSTEM:->https://leetcode.com/discuss/interview-question/893279/
+THROTTLING GATEWAY:-> https://leetcode.com/discuss/interview-question/895851/
+OPTIMAL UTILISATIOM:-> https://leetcode.com/discuss/interview-question/373202
