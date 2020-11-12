@@ -12,3 +12,7 @@ LABELLING SYSTEM:-> https://leetcode.com/discuss/interview-question/893442/
 CHEMICAL DELIVERY SYSTEM:->https://leetcode.com/discuss/interview-question/893279/
 THROTTLING GATEWAY:-> https://leetcode.com/discuss/interview-question/895851/
 OPTIMAL UTILISATIOM:-> https://leetcode.com/discuss/interview-question/373202
+
+GEEKS:
+undo, redo stack:-> https://www.geeksforgeeks.org/implement-undo-and-redo-features-of-a-text-editor/
+kth position element:-> https://www.geeksforgeeks.org/kth-smallest-element-from-an-array-of-intervals/
