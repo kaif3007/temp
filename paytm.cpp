@@ -197,3 +197,76 @@ int minPalPartion(char* str)
     // Return the min cut value for complete string. i.e., str[0..n-1] 
     return C[n - 1]; 
 } 
+#########################################################################################
+max sum path between 2 leaves of a binary tree
+
+int ans;
+int recurse(Node* root)
+{
+    if(!root)
+     return 0;
+     
+    int p1=recurse(root->left);
+    int p2=recurse(root->right);
+    
+    if(root->left and root->right)
+        { 
+            ans=max({ans,p1+p2+root->data});
+            return max(p1,p2)+root->data;
+        }
+        
+    return root->left?p1+root->data:p2+root->data;
+}
+
+int maxPathSum(Node* root)
+{ 
+    ans=INT_MIN;
+    recurse(root);
+    
+    return ans;
+}
+
+#########################################################################################
+transform a to b if we can move only 1 character from a to its front
+
+int transform (string a, string b)
+    {
+	    vector<int> v(300,0);
+	    if(a.size()!= b.size())
+	     return -1;
+	    
+	    for(int i=0;i<a.size();i++)
+	    {
+	        v[a[i]]++;
+	        v[b[i]]--;
+	    }
+	    
+	    int flag = 0;
+	    for(int i=0;i<300;i++)
+	    {
+	        if(v[i]!=0){
+	            flag = 1;
+	            break;
+	        }
+	    }
+	    
+	    if(flag)
+	    {
+	       return -1;
+	    }
+	    
+	    int x = a.size()-1;
+	    int y = b.size()-1;
+	    int ans = 0;
+	    while(x>=0)
+	    {
+	        if(x>=0 && a[x]== b[y])
+	            y--;
+	        else if(x>=0 && a[x] != b[y])
+	            ans++;
+	        x--;
+	    }
+	  
+	  return ans;
+    }
+};
