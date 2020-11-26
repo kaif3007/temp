@@ -195,5 +195,129 @@ int main()
     return 0;
 }
 
+##################################################################################################
+#include <bits/stdc++.h> 
+using namespace std; 
 
+
+vector<int> g[100005];
+int par[100005],cont[100005];
+int dis[100005];
+
+void dfs(int x,int& t) 
+{
+  cont[x] = t;
+  for(int i=0;i<g[x].size();i++) 
+    if(cont[g[x][i]]==100005) 
+        dfs(g[x][i],t);
+  
+}
+
+void distanc(int x,int d)
+{
+  dis[x] = d;
+  for(int i=0;i<g[x].size();i++) 
+    if(dis[g[x][i]]==-1) 
+        distanc(g[x][i],d+1);
+  
+}
+
+int root(int a) 
+{
+    return (a==par[a])?a:par[a]=root(par[a]);
+}
+
+void unite(int x,int y,int t)
+{
+    int xp=root(x);
+    int yp=root(y);
+
+    if(xp==yp) 
+     return;
+
+
+  int u = max(x,y);
+  int v = min(x,y);
+
+  if(v==0) 
+    dfs(u,t);
+
+  par[u] = v;
+}
+
+
+int main() 
+{ 
+    iota(par,par+100005-3,0);
+    fill(cont,cont + 100005,100005);
+
+    vector<pair<int,int> > v;
+
+    int t,m; 
+    cin>>t>>m;
+    for(int ct=1;ct<=t;ct++)
+    {
+      int ty;
+      cin>>ty;
+      if(ty==1) 
+      {
+          int x,y; 
+          cin>>x>>y;
+          unite(x,y,ct);
+          g[x].push_back(y);
+          g[y].push_back(x);
+      } 
+      else
+    {
+        int x,y; 
+        cin>>x>>y;
+        v.push_back({ct,y});
+      }
+
+    }
+
+    memset(dis,-1,sizeof(dis));
+    distanc(0,0);
+
+    for(int i=0;i<v.size();i++) 
+    {
+      int ct = v[i].first, 
+      x = v[i].second;
+      if(cont[x]<ct) 
+       {
+         if(dis[x]%2)
+         cout<<-1<<endl;
+         else
+         cout<<1<<endl;
+       }
+      else 
+        cout<<0<<endl;
+    }
+
+    
+    return 0; 
+}
+/*
+
+
+-1
+0
+0
+1
+-1
+
+--
+6 3
+1 1 2
+1 0 1
+1 3 4
+2 0 1
+2 0 2
+2 0 4
+
+-1
+1
+0
+
+*/
 
